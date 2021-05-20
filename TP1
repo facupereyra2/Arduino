@@ -1,0 +1,331 @@
+EJERCICIO 1
+
+const int red=13;
+const int green=12;
+const int yellow=11;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(red, OUTPUT);
+  pinMode(green, OUTPUT);
+  pinMode(yellow, OUTPUT);
+}
+
+void loop()
+{
+	digitalWrite(red, 255);
+	delay(2000);
+	digitalWrite(red, LOW);
+	delay(1000);
+  	digitalWrite(green, HIGH);
+  	delay(2000);
+  	digitalWrite(green, LOW);
+  	delay(1000);
+  	digitalWrite(yellow, HIGH);
+  	delay(2000);
+  	digitalWrite(yellow, LOW);
+  	delay(1000);
+}
+
+EJERCICIO 2
+
+const int rojo=13;
+const int =12;
+const int yellow=11;
+int n;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(red, OUTPUT);
+  pinMode(green, OUTPUT);
+  pinMode(yellow, OUTPUT);
+}
+
+void loop()
+{
+  n = random(0,10);
+  Serial.println(n);
+  if ((n==1) || (n==3) || (n==7)){
+    	digitalWrite(red, HIGH);
+    	delay(2000);
+    	digitalWrite(red, LOW);
+        delay(1000);
+  } else if ((n==0) || (n==2) || (n==8)){
+    	digitalWrite(green, HIGH);
+        delay(2000);
+    	digitalWrite(green, LOW);
+        delay(1000);
+  } else if ((n==4) || (n==5) || (n==9)){
+      	digitalWrite(yellow, HIGH);
+        delay(2000);
+    	digitalWrite(yellow, LOW);
+        delay(1000);
+  } else {
+          digitalWrite(yellow, LOW);
+          digitalWrite(red, LOW);
+          digitalWrite(green, LOW);
+    	  delay(2000);
+        }
+}
+
+EJERCICIO 3
+
+const int rojo=13;
+const int azul=12;
+const int verde=11;
+void setup()
+{
+  pinMode(rojo, OUTPUT);
+  pinMode(azul, OUTPUT);
+  pinMode(verde, OUTPUT);
+}
+
+void loop()
+{
+  for(int i=0; i<=6;i++){
+  	cambiar_color(i);
+    delay(2000);
+    cambiar_color(7);
+    delay(2000);
+  }
+}
+  void cambiar_color(int numero){
+  switch(numero){
+  case 0: //rojo
+    digitalWrite(rojo, HIGH);
+    digitalWrite(verde, LOW);
+    digitalWrite(azul, LOW);
+    break;
+  case 1://verde
+    digitalWrite(rojo, LOW);
+    digitalWrite(verde, HIGH);
+    digitalWrite(azul, LOW);
+    break;
+  case 2://azul
+    digitalWrite(rojo, LOW);
+    digitalWrite(verde, LOW);
+    digitalWrite(azul, HIGH);
+    break;
+  case 3://amarillo
+    digitalWrite(rojo, HIGH);
+    digitalWrite(verde, HIGH);
+    digitalWrite(azul, LOW);
+    break;
+  case 4://violeta
+    digitalWrite(rojo, HIGH);
+    digitalWrite(verde, LOW);
+    digitalWrite(azul, HIGH);
+    break;
+  case 5://celeste
+    digitalWrite(rojo, LOW);
+    digitalWrite(verde, HIGH);
+    digitalWrite(azul, HIGH);
+    break;
+  case 6://blanco
+    digitalWrite(rojo, HIGH);
+    digitalWrite(verde, HIGH);
+    digitalWrite(azul, HIGH);
+    break;
+  default://apagado
+    digitalWrite(rojo, LOW);
+    digitalWrite(verde, LOW);
+    digitalWrite(azul, LOW);
+    break;
+}
+  }
+
+
+EJERCICIO 4
+
+const int led =2; 
+const int pot =0; 
+int brillo;
+ 
+void setup() {
+  
+  pinMode(led, OUTPUT);
+ }
+void loop() {
+ brillo = analogRead(pot)/4;  
+  analogWrite (led,brillo);
+ }
+ 
+ EJERCICIO 5
+ 
+ // C++ code
+const int verde=10;
+const int azul=11;
+const int rojo=12;
+const int pot1=0;
+const int pot2=1;
+const int pot3=2;
+int brillo;
+int brillo2;
+int brillo3;
+void setup()
+{
+  pinMode(verde, OUTPUT);
+  pinMode(azul, OUTPUT);
+  pinMode(rojo, OUTPUT);
+}
+
+void loop()
+{
+  brillo = analogRead(pot1)/4;  
+  analogWrite (rojo,brillo);
+  brillo2 = analogRead(pot2)/4; 
+  analogWrite (verde,brillo2);
+  brillo3 = analogRead(pot3)/4; 
+  analogWrite (azul,brillo3);
+}
+
+EJERCICIO 6
+
+void setup()
+{
+  pinMode(0, INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+	Serial.println(analogRead(0));
+}
+
+EJERCICIO 7
+
+const int echo=11;
+const int trig=12;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
+}
+
+void loop()
+{
+  digitalWrite(trig, LOW);
+  delayMicroseconds(5);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+  
+  int duration = pulseIn(echo, HIGH);
+  
+  double cm= duration*0.034/2;
+  Serial.print("Distance: ");
+  Serial.print(cm);
+  Serial.println(" cm");
+}
+
+EJERCICO 8
+
+const int rojo=13;
+const int azul=12;
+const int verde=11;
+const int foto=A0;
+int intensidad;
+void setup()
+{
+  pinMode(13, OUTPUT);
+}
+
+void loop()
+{
+  intensidad = analogRead(foto)/3;
+  analogWrite (rojo,intensidad);
+  
+  intensidad = analogRead(foto)/3;
+  analogWrite (azul,intensidad);
+
+  intensidad = analogRead(foto)/3;
+  analogWrite (verde,intensidad);
+
+}
+
+EJERCICIO 9
+
+const int echo=12;
+const int trig=13;
+const int rojo=11;
+void setup()
+{
+  pinMode(rojo, OUTPUT);
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
+}
+
+void loop()
+{
+  digitalWrite(trig, LOW);
+  delayMicroseconds(5);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+  
+  int duration = pulseIn(echo, HIGH);
+  
+  double distancia= duration*0.034/2;
+  
+  if (distancia<5) {
+    digitalWrite(rojo, HIGH);
+  }
+  else if (distancia<10) {
+    analogWrite(rojo, 200);
+  }
+  else if (distancia<25) {
+    analogWrite(rojo,20);
+  }
+  else if (distancia>25) {
+    digitalWrite(rojo, LOW);
+  }
+}
+
+EJERCICIO 10
+
+const int echo=12;
+const int trig=13;
+const int rojo=11;
+const int azul=10;
+const int verde=9;
+void setup()
+{
+  pinMode(rojo, OUTPUT);
+  pinMode(azul, OUTPUT);
+  pinMode(verde, OUTPUT);
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
+}
+
+void loop()
+{
+  digitalWrite(trig, LOW);
+  delayMicroseconds(5);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+  
+  int duration = pulseIn(echo, HIGH);
+  
+  double distancia= duration*0.034/2;
+  
+  if (distancia<5) {
+    digitalWrite(verde, LOW);
+    digitalWrite(rojo, HIGH);
+  }
+  else if (distancia<10) {
+    analogWrite(rojo, 250);
+    analogWrite(verde,100);
+  }
+  else if (distancia<25) {
+    digitalWrite(rojo, HIGH);
+    digitalWrite(verde, HIGH);
+  }
+  else if (distancia>25) {
+    digitalWrite(rojo, LOW);
+    digitalWrite(verde, LOW);
+    digitalWrite(rojo, LOW);
+  }
+}
+
