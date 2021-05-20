@@ -1,0 +1,129 @@
+EJERCICIO 1
+
+const int echo=12;
+const int trig=13;
+const int rojo=11;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(rojo, OUTPUT);
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
+}
+
+void loop()
+{
+  digitalWrite(trig, LOW);
+  delayMicroseconds(5);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+  
+  int duration = pulseIn(echo, HIGH);
+  
+  double distancia= duration*0.034/2;
+  Serial.print("Distance: ");
+  Serial.print(distancia);
+  Serial.println(" cm");
+  
+  if (distancia<5) {
+    digitalWrite(rojo, HIGH);
+  }
+  else{
+    digitalWrite(rojo, LOW);
+  }
+}
+
+EJERCICIO 3
+
+const int rojo=13;
+const int foto=A0;
+int intensidad;
+void setup()
+{
+  pinMode(rojo, OUTPUT);
+  pinMode(foto, INPUT);
+}
+
+void loop()
+{
+  intensidad = analogRead(foto)/135;
+  analogWrite (rojo,intensidad);
+  if (intensidad > 3){
+    digitalWrite(rojo, HIGH);
+  }
+  else if (intensidad < 3){
+    digitalWrite(rojo, LOW);
+  }
+}
+
+EJERCICIO 7
+
+EJERCICIO 8
+
+EJERCICIO 9
+
+const int pulsador = 13;
+const int rojo = 12;
+const int azul = 11;
+const int verde = 10;
+int boton;
+int nroRandom;
+
+void setup()
+{
+  pinMode(rojo, OUTPUT);
+  pinMode(azul, OUTPUT);
+  pinMode(verde, OUTPUT);
+  pinMode(pulsador, INPUT);
+}
+
+void loop()
+{
+  boton = digitalRead(pulsador);
+  nroRandom = random(0,4);
+
+  if (nroRandom == 1){
+      digitalWrite(rojo, boton);
+      delay(1500);
+      digitalWrite(rojo, LOW);
+  }
+  else if (nroRandom == 2){
+      digitalWrite(azul, boton);
+      delay(1500);
+      digitalWrite(azul, LOW);
+  }
+  else if (nroRandom == 3){
+      digitalWrite(verde, boton);
+      delay(1500);
+      digitalWrite(verde, LOW);
+  }
+
+}
+
+EJERCICIO 12
+
+const int sensor=13;
+const int rojo=12;
+const int azul=11;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(rojo, OUTPUT);
+  pinMode(azul, OUTPUT);
+  pinMode(sensor, INPUT);
+}
+
+void loop()
+{
+  digitalWrite(rojo,LOW);
+  if (digitalRead(sensor)==HIGH){
+    digitalWrite(azul,LOW);
+    digitalWrite(rojo, HIGH);
+    delay(1000);
+    digitalWrite(rojo,LOW);
+  }else{
+    digitalWrite(rojo, LOW);
+    digitalWrite(azul,HIGH);
+  }
+}
