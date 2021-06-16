@@ -1,0 +1,147 @@
+#Ejercicio 1
+
+#include <Servo.h>
+Servo servo;
+int r;
+
+void setup()
+{
+  servo.attach(13);
+}
+
+void loop()
+{
+  r=random(0,360);
+  servo.write(r);
+  delay(1000);
+}
+
+#Ejercicio 2
+
+#include <Servo.h>
+Servo servo;
+const int pot=A0;
+int mov;
+void setup()
+{
+  servo.attach(13);
+}
+
+void loop()
+{
+	mov = analogRead(pot)/5;
+    servo.write(mov);
+}
+
+#Ejercicio 3
+
+#include <Servo.h>
+#include <random>
+Servo servo;
+int r;
+int c;
+
+void setup()
+{
+  Serial.begin(9600);
+  servo.attach(13);
+}
+
+void loop()
+{
+  	r=random(0,180);
+  	servo.write(r);
+ 	delay(1000);
+  	c = c+1;
+    if (c==3)
+    {
+      Serial.println(r);
+      Serial.println("0");
+      servo.write(0);
+      delay(2000);
+      Serial.println("90");
+      servo.write(90);
+      delay(2000);
+      Serial.println("180");
+      servo.write(180);
+      delay(2000);
+    }
+    
+}
+
+
+#Ejercicio 6
+
+int buzzer=11;
+const int echo=12;
+const int trig=13;
+void setup()
+{
+  pinMode(11, OUTPUT);
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
+}
+
+void loop()
+{
+  delayMicroseconds(5);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+  int duration = pulseIn(echo, HIGH);
+  double cm= duration*0.034/2;
+  
+  if ((cm > 20) && (cm < 30)){
+    digitalWrite(buzzer, HIGH);
+  	tone(buzzer, 5274, 100);
+    delay(1500);
+  }
+  else if ((cm > 12) && (cm < 20)){
+    digitalWrite(buzzer, HIGH);
+  	tone(buzzer, 5274, 100);
+    delay(1000);
+  }
+  else if ((cm > 6) && (cm < 12)){
+    digitalWrite(buzzer, HIGH);
+  	tone(buzzer, 5274, 100);
+    delay(500);
+  }
+  else if ((cm > 2) && (cm < 6)){
+    digitalWrite(buzzer, HIGH);
+  	tone(buzzer, 5274, 100);
+    delay(250);
+  }
+
+  
+}
+
+#Ejercicio 7
+#include <LiquidCrystal.h>
+
+  const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
+  LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+  const int echo=9;
+  const int trig=10;
+  int duration;
+void setup() {
+  lcd.begin(16,2);
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
+  lcd.print("distancia: ");
+}
+
+void loop() {
+  digitalWrite(trig, LOW);
+  delayMicroseconds(5);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+  
+  int duration = pulseIn(echo, HIGH);
+  
+  double distancia= duration*0.034/2;
+  lcd.setCursor(7, 1);
+  lcd.print(distancia);
+  lcd.setCursor(14, 1);
+  lcd.print("cm");
+}
