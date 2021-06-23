@@ -59,7 +59,31 @@ void loop()
 
 EJERCICIO 7
 
-EJERCICIO 8
+const int rojo = 12;
+const int verde = 13;
+const int flex = A0;
+int valor_rojo;
+int valor_verde;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(rojo, OUTPUT);
+  pinMode(verde, OUTPUT);
+  pinMode(flex, INPUT);
+}
+
+void loop()
+{
+  valor_rojo = analogRead(flex)-1;
+  Serial.println("Valor del led rojo: " + String(valor_rojo));               
+  valor_verde = map(valor_rojo, 50, 300, 0, 255);
+  Serial.println("Valor del led verde: " + String(valor_verde));
+  analogWrite(rojo, valor_rojo);
+  analogWrite(verde, valor_verde);
+  delay(100);               
+  
+}
+
 
 EJERCICIO 9
 
